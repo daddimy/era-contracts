@@ -13,7 +13,7 @@ bytes4 constant PAYMASTER_VALIDATION_SUCCESS_MAGIC = IPaymaster.validateAndPayFo
 
 interface IPaymaster {
     /// @dev Called by the bootloader to verify that the paymaster agrees to pay for the
-    /// fee for the transaction. This transaction should also send the necessary amount of funds onto the bootloader
+    /// the transaction's fees. This transaction should also send the necessary amount of funds onto the bootloader
     /// address.
     /// @param _txHash The hash of the transaction
     /// @param _suggestedSignedHash The hash of the transaction that is signed by an EOA
