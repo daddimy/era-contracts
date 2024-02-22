@@ -225,6 +225,16 @@ contract ContractDeployer is IContractDeployer, ISystemContract {
         bytes32 _bytecodeHash,
         bytes calldata _input
     ) external payable override returns (address) {
+        // evmCode[address(0x10001)] = hex"602A60005260006020F3";
+        // evmCode[address(0x10002)] = hex"602A602A60005260006020F3";
+        // ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.storeAccountConstructedCodeHash(address(0x10001), Utils.hashEVMBytecode(evmCode[address(0x10001)]));
+        // ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.storeAccountConstructedCodeHash(address(0x10002), Utils.hashEVMBytecode(evmCode[address(0x10002)]));
+
+        address benchmarkCallerAddress = 0xe594aE1d7205E8E92fb22C59D040c31e1FCD139f;
+        evmCode[benchmarkCallerAddress] = hex"6080604052348015600e575f80fd5b505f3660605a5f805f805f803586f15a82035f5280602b5760205ffd5b60205ff3fea2646970667358221220e1b7380658af229e01ccd395396862f9d5dcabb6503ec41f42822bf4922b6ef264736f6c63430008180033";
+        ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.storeAccountConstructedCodeHash(benchmarkCallerAddress, Utils.hashEVMBytecode(evmCode[benchmarkCallerAddress]));
+
+
         return createAccount(_salt, _bytecodeHash, _input, AccountAbstractionVersion.None);
     }
 
